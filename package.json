@@ -1,0 +1,19 @@
+{
+  "name": "webpack-chunk-load-plugin",
+  "version": "1.0.0",
+  "description": "A webpack plugin to modify the code for loading async chunks",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jovdb/webpack-chunk-load-plugin.git"
+  },
+  "keywords": [
+    "webpack",
+    "chunk",
+    "import",
+    "webpack plugin"
+  ],
+  "author": "Jo Van den Berghe",
+  "license": "MIT",
+  "homepage": "https://github.com/jovdb/webpack-chunk-load-plugin#readme"
+}
