@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable class-methods-use-this */
 Object.defineProperty(exports, "__esModule", { value: true });
 const webpack = require("webpack");
@@ -15,13 +16,14 @@ class ChunkLoadPlugin {
 			const { mainTemplate, runtimeTemplate } = compilation;
 			mainTemplate.hooks.localVars.tap({ name: pluginName, stage: 1 }, (source) => {
 				const script = runtimeTemplate.iife("", `if(typeof ${webpack.RuntimeGlobals.require} !== "undefined") {
-					var oriLoadScript = ${webpack.RuntimeGlobals.ensureChunk};
+					var oriLoadScript = ${webpack.RuntimeGlobals.ensureChunk
+					var loaded = {};
 					function addWaitForNetwork(fn) {
 						var loadScript = fn;
 						return function waitForNetwork() {
 							var unsubscribe;
 							var args = arguments;
-							if (!window || !window.navigator || window.navigator.onLine) return fn.apply(null, args);
+							if (loaded[args[0]] || !window || !window.navigator || window.navigator.onLine) return fn.apply(null, args);
 							return new Promise((resolve) => {
 								window.addEventListener("online", resolve);
 								unsubscribe = () => window.removeEventListener("online", resolve);
@@ -39,6 +41,10 @@ class ChunkLoadPlugin {
 						return function execWithRetry() {
 							var args = arguments;
 							return oriLoadScript.apply(null, args)
+								.then((result) => {
+									loaded[args[0]] = true;
+									return result;
+								})
 								.catch((e) => {
 									retryCount += 1;
 									if (retryCount > ${maxRetries}) throw e;
