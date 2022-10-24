@@ -1,6 +1,6 @@
 {
   "name": "webpack-chunk-load-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A webpack plugin to modify the code for loading async chunks",
   "main": "src/index.js",
   "repository": {

@@ -16,7 +16,7 @@ class ChunkLoadPlugin {
 			const { mainTemplate, runtimeTemplate } = compilation;
 			mainTemplate.hooks.localVars.tap({ name: pluginName, stage: 1 }, (source) => {
 				const script = runtimeTemplate.iife("", `if(typeof ${webpack.RuntimeGlobals.require} !== "undefined") {
-					var oriLoadScript = ${webpack.RuntimeGlobals.ensureChunk
+					var oriLoadScript = ${webpack.RuntimeGlobals.ensureChunk};
 					var loaded = {};
 					function addWaitForNetwork(fn) {
 						var loadScript = fn;
